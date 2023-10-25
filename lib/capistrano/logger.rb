@@ -100,20 +100,6 @@ module Capistrano
           color = :none
           style = nil
 
-          Logger.sorted_formatters.each do |formatter|
-            if (formatter[:level] == level || formatter[:level].nil?)
-              if message =~ formatter[:match] || line_prefix =~ formatter[:match]
-                color = formatter[:color] if formatter[:color]
-                style = formatter[:style] || formatter[:attribute] # (support original cap colors)
-                message.gsub!(formatter[:match], formatter[:replace]) if formatter[:replace]
-                message = formatter[:prepend] + message unless formatter[:prepend].nil?
-                message = message + formatter[:append] unless formatter[:append].nil?
-                message = Time.now.strftime('%Y-%m-%d %T') + ' ' + message if formatter[:timestamp]
-                break unless formatter[:replace]
-              end
-            end
-          end
-
           if color == :hide
             # Don't do anything if color is set to :hide
             return false

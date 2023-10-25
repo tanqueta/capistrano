@@ -7,7 +7,9 @@ gemspec
 # Development Dependencies from the Gemfile
 # are merged here.
 #
-group :development do
+group :development, :test do
   gem "rake"
   gem "pry"
+  gem "test-unit"
+  gem "rexml"
 end
